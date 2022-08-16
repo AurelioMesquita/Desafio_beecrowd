@@ -1,28 +1,37 @@
-var input = require('fs').readFileSync('stdin', 'utf8');
+var input = require('fs').readFileSync('stdin.txt', 'utf8');
 var valores = input.split('\n');
 
-
-
-
-
 function main(){
-    let quantidadeCasoTestes = valores.shift();
-    for(let f=0;f<quantidadeCasoTestes;f++){
-        let casosTestes = valore.shift();
-        casosTestes =casosTestes.split('')
-        console.log(casosTestes)
-        // casosTestes = casosTestes.replace(/\s+/g, ' ')
-        // if(casosTestes!==" "){
-            
-        //     let primeiroIten=casosTestes.indexOf('<')
-        //     let segundoItem=casosTestes.indexOf('>')
-        //     const Diamante = casosTestes.substring(primeiroIten,segundoItem+1)
-        //     console.log(Diamante)   
-        // }
-        
-    
+    let numero_casos = parseInt(valores[0]);
+    for(let i = 1; i<=numero_casos;i++){
+        let quantidade_Diamante = verificaDiamante(valores[i]);
+        console.log(quantidade_Diamante);
     }
-
 }
 
+
+function verificaDiamante(diamantes){
+	let inicioDiamante = -1;
+	let fimDiamante = -1;
+	let numero_Diamante = 0;
+	
+	if(diamantes.indexOf('>') != -1){
+		for(let i=0;i<diamantes.length;i++)  { 
+			if(diamantes[i]=='<'){
+				inicioDiamante = i;
+			}
+			if(inicioDiamante != -1 && diamantes[i] == '>' ){
+				fimDiamante = i;
+			}
+			if(inicioDiamante != -1 && fimDiamante >0){
+				diamantes = diamantes.replace(diamantes.substring(inicioDiamante,fimDiamante+1),'');
+				numero_Diamante++;
+				inicioDiamante=0;
+				fimDiamante=-1;
+			}
+		} 
+		return numero_Diamante;  
+	}
+	return  0;
+}
 main();
