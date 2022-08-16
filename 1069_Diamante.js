@@ -11,23 +11,22 @@ function main(){
 
 
 function verificaDiamante(diamantes){
+	let numero_Diamante = 0;
 	let inicioDiamante = -1;
 	let fimDiamante = -1;
-	let numero_Diamante = 0;
 	
 	if(diamantes.indexOf('>') != -1){
-		for(let i=0;i<diamantes.length;i++)  { 
+		for(let i=0;i<=diamantes.length;i++)  {
 			if(diamantes[i]=='<'){
 				inicioDiamante = i;
 			}
 			if(inicioDiamante != -1 && diamantes[i] == '>' ){
 				fimDiamante = i;
-			}
-			if(inicioDiamante != -1 && fimDiamante >0){
 				diamantes = diamantes.replace(diamantes.substring(inicioDiamante,fimDiamante+1),'');
 				numero_Diamante++;
-				inicioDiamante=0;
+				inicioDiamante=-1;
 				fimDiamante=-1;
+				i=-1;
 			}
 		} 
 		return numero_Diamante;  
